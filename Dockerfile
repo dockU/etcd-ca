@@ -7,3 +7,6 @@ ADD https://dl.bintray.com/jchen/docku/latest/etcd-ca /usr/sbin/etcd-ca
 RUN chmod +x /usr/sbin/etcd-ca
 
 RUN mkdir -p /opt/etcd-ca/
+
+WORKDIR /opt/etcd-ca
+ENTRYPOINT ["/usr/sbin/etcd-ca"]
