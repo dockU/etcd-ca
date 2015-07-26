@@ -1,0 +1,13 @@
+all: get_etcd-ca build upload clean
+
+get_etcd-ca:
+	git clone https://github.com/coreos/etcd-ca /opt/etcd-ca
+
+build: /opt/etcd-ca
+	cd /opt/etcd-ca && ./build
+
+upload: /opt/etcd-ca/bin/etcd-ca
+	curl -T /opt/etcd-ca/bin/etcd-ca -u${BINTRAY_USER}:${BINTRAY_TOKEN} "https://api.bintray.com/content/${BINTRAY_USER}/${BINTRAY_REPO}/etcd-ca/latest/etcd-ca?publish=1"
+
+clean:
+	rm -rf /opt/etcd-ca
